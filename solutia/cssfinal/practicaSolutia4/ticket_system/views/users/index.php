@@ -145,7 +145,7 @@ require_once dirname(__FILE__) . '/../partials/header.php';
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><i class="fas fa-users-cog me-2"></i>Gestión de Usuarios</h1>
         <!-- Corregido: URL relativa al controlador frontal -->
-        <a href="index.php?controller=user&action=create" class="btn btn-primary">
+        <a href="create.php" class="btn btn-primary">
             <i class="fas fa-user-plus me-1"></i> Nuevo Usuario
         </a>   
     </div>
@@ -208,8 +208,8 @@ require_once dirname(__FILE__) . '/../partials/header.php';
                                     <td><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <!-- Corregir la URL de edición -->
-                                            <a href="../../index.php?controller=user&action=edit&id=<?php echo $user['id']; ?>" class="btn btn-primary">
+                                            <!-- Ruta corregida con ID en la URL -->
+                                            <a href="edit.php?id=<?php echo $user['id']; ?>" class="btn btn-primary">
                                                 <i class="fas fa-edit me-1"></i> Editar
                                             </a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $user['id']; ?>">

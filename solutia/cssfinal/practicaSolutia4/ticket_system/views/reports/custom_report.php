@@ -635,10 +635,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Resultados del Informe
         </h6>
             <div class="dropdown no-arrow">
-                <a href="index.php?controller=report&action=export&format=csv&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?>" class="btn btn-sm btn-success">
+                <a href="../../../index.php?controller=report&action=export&format=csv&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?>" class="btn btn-sm btn-success">
                     <i class="bi bi-file-earmark-excel"></i> Exportar CSV
                 </a>
-                <a href="index.php?controller=report&action=export&format=pdf&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?>" class="btn btn-sm btn-danger">
+                <a href="../../../index.php?controller=report&action=export&format=pdf&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?>" class="btn btn-sm btn-danger">
                     <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
                 </a>
                 <a href="performance_report.php" class="btn btn-sm btn-primary">
@@ -707,10 +707,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?php echo htmlspecialchars($ticket['technician_name'] ?? 'Sin asignar'); ?></td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="index.php?controller=report&action=export&format=csv&ticket_id=<?php echo $ticket['id']; ?>" class="btn btn-sm btn-success" title="Exportar a CSV">
+                                    <a href="../../../index.php?controller=report&action=export&format=csv&ticket_id=<?php echo $ticket['id']; ?>" class="btn btn-sm btn-success" title="Exportar a CSV">
                                         <i class="bi bi-file-earmark-excel"></i>
                                     </a>
-                                    <a href="index.php?controller=report&action=export&format=pdf&ticket_id=<?php echo $ticket['id']; ?>" class="btn btn-sm btn-danger" title="Exportar a PDF">
+                                    <a href="../../../index.php?controller=report&action=export&format=pdf&ticket_id=<?php echo $ticket['id']; ?>" class="btn btn-sm btn-danger" title="Exportar a PDF">
                                         <i class="bi bi-file-earmark-pdf"></i>
                                     </a>
                                 </div>

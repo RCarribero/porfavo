@@ -641,7 +641,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="index.php?controller=report&action=export&format=pdf&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?>" class="btn btn-sm btn-danger">
                     <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
                 </a>
-                <a href="performance_report.php" class="btn btn-sm btn-primary">
+                <a href="perfomance.php" class="btn btn-sm btn-primary">
                     <i class="bi bi-graph-up"></i> Ver Gráficos
                 </a>
             </div>

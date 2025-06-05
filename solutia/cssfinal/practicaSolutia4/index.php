@@ -1,21 +1,21 @@
 <?php
-// Definir la constante BASE_PATH
-define('BASE_PATH', __DIR__ . '/');
+// Incluir el archivo de configuración de rutas
+require_once __DIR__ . '/ticket_system/config/paths.php';
 
 // Iniciar sesión
 session_start();
 
 // Redirigir al login si no está logueado y no está accediendo al login
 if (empty($_SESSION['user_id']) && (($_GET['controller'] ?? '') !== 'user' || ($_GET['action'] ?? '') !== 'login')) {
-    header('Location: ticket_system/views/sesion/login.php');
+    header('Location: ' . SYSTEM_URL . 'views/sesion/login.php');
     exit;
 }
 
 // Incluir los controladores
-require_once __DIR__ . '/ticket_system/controllers/UserController.php';
-require_once __DIR__ . '/ticket_system/controllers/CategoryController.php';
-require_once __DIR__ . '/ticket_system/controllers/ReportController.php';
-require_once __DIR__ . '/ticket_system/controllers/AdminController.php';
+require_once CONTROLLERS_PATH . 'UserController.php';
+require_once CONTROLLERS_PATH . 'CategoryController.php';
+require_once CONTROLLERS_PATH . 'ReportController.php';
+require_once CONTROLLERS_PATH . 'AdminController.php';
 
 // Determinar el controlador a utilizar
 $controller = $_GET['controller'] ?? 'admin';

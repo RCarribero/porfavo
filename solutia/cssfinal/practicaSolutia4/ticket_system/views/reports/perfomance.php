@@ -1,7 +1,85 @@
 <?php
+// Iniciar sesión antes de cualquier salida HTML
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Limpiar mensajes de error previos
+if (isset($_SESSION['error'])) {
+    $previousError = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
+// Verificar permisos - Corregido para usar 'role' en lugar de 'user_role'
+$userRole = $_SESSION['role'] ?? '';
+$allowedRoles = ['admin', 'manager', 'supervisor'];
+
+if (!in_array($userRole, $allowedRoles)) {
+    // Esta parte no se ejecutará gracias a la corrección, pero la mantenemos por seguridad
+    $_SESSION['error'] = "No tienes permisos para acceder a los informes de rendimiento.";
+    header('Location: /porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/dashboard.php');
+    exit;
+}
+
 // Incluir header
 require_once __DIR__ . '/../partials/header.php';
+require_once __DIR__ . '/../../config/database.php';
 
+// Cargar datos de tickets si no están disponibles
+if (empty($ticketsByStatus) || empty($ticketsByCategory) || empty($ticketsByTechnician)) {
+    try {
+        $db = new Database();
+        $conn = $db->getConnection();
+        
+        // Obtener tickets por estado
+        if (empty($ticketsByStatus)) {
+            $statusQuery = "SELECT status, COUNT(*) as count FROM tickets GROUP BY status";
+            $statusStmt = $conn->prepare($statusQuery);
+            $statusStmt->execute();
+            $ticketsByStatus = $statusStmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        // Obtener tickets por categoría
+        if (empty($ticketsByCategory)) {
+            $categoryQuery = "SELECT c.name as category, COUNT(*) as count 
+                             FROM tickets t 
+                             JOIN categories c ON t.category_id = c.id 
+                             GROUP BY t.category_id";
+            $categoryStmt = $conn->prepare($categoryQuery);
+            $categoryStmt->execute();
+            $ticketsByCategory = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        // Obtener tickets por técnico
+        if (empty($ticketsByTechnician)) {
+            $techQuery = "SELECT CONCAT(u.first_name, ' ', u.last_name) as technician, COUNT(*) as count 
+                         FROM tickets t 
+                         JOIN users u ON t.assigned_to = u.id 
+                         WHERE t.assigned_to IS NOT NULL 
+                         GROUP BY t.assigned_to";
+            $techStmt = $conn->prepare($techQuery);
+            $techStmt->execute();
+            $ticketsByTechnician = $techStmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        // Obtener tiempo promedio de resolución
+        if (empty($avgResolutionTime) || !isset($avgResolutionTime['avg_hours'])) {
+            $timeQuery = "SELECT AVG(TIMESTAMPDIFF(HOUR, created_at, resolved_at)) as avg_hours 
+                         FROM tickets 
+                         WHERE status = 'resolved' AND resolved_at IS NOT NULL";
+            $timeStmt = $conn->prepare($timeQuery);
+            $timeStmt->execute();
+            $avgResolutionTime = $timeStmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Si no hay tickets resueltos, establecer a cero
+            if ($avgResolutionTime['avg_hours'] === null) {
+                $avgResolutionTime['avg_hours'] = 0;
+            }
+        }
+    } catch (Exception $e) {
+        // Error silencioso - no mostramos mensaje de error ya que eliminamos el panel de debug
+    }
+}
 
 // Asegurar que todas las variables están definidas
 $ticketsByStatus = $ticketsByStatus ?? [];
@@ -14,7 +92,7 @@ $avgResolutionTime = $avgResolutionTime ?? ['avg_hours' => 0];
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Gráficos de Rendimiento</h1>
-        <a href="index.php?controller=report&action=custom" class="btn btn-secondary">
+        <a href="custom_report.php" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Volver a Informes
         </a>
     </div>
@@ -27,11 +105,17 @@ $avgResolutionTime = $avgResolutionTime ?? ['avg_hours' => 0];
                     <h5 class="mb-0">Tickets por Estado</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="statusChart"></canvas>
+                    <?php if (empty($ticketsByStatus)): ?>
+                        <div class="alert alert-warning text-center">
+                            <i class="bi bi-exclamation-circle"></i> No hay datos de tickets disponibles por estado.
+                        </div>
+                    <?php else: ?>
+                        <canvas id="statusChart"></canvas>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-       
+        
         <!-- Gráfico de tickets por categoría -->
         <div class="col-md-6 mb-4">
             <div class="card h-100 graph-container">
@@ -39,7 +123,13 @@ $avgResolutionTime = $avgResolutionTime ?? ['avg_hours' => 0];
                     <h5 class="mb-0">Tickets por Categoría</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="categoryChart"></canvas>
+                    <?php if (empty($ticketsByCategory)): ?>
+                        <div class="alert alert-warning text-center">
+                            <i class="bi bi-exclamation-circle"></i> No hay datos de tickets disponibles por categoría.
+                        </div>
+                    <?php else: ?>
+                        <canvas id="categoryChart"></canvas>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

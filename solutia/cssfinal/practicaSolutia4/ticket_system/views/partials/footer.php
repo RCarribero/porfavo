@@ -1,3 +1,28 @@
+<?php
+// Incluir el archivo de rutas si no está incluido
+if (!defined('SYSTEM_URL')) {
+    require_once dirname(__FILE__, 4) . '/ticket_system/config/paths.php';
+}
+
+// Enlaces absolutos basados en roles
+$dashboardUrl = SYSTEM_URL . 'dashboard.php';
+$ticketsUrl = SYSTEM_URL . 'tickets/index.php';
+$reportsUrl = SYSTEM_URL . 'reports/custom_report.php';
+
+// Si el usuario tiene rol admin, usar las URLs admin
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    $dashboardUrl = SYSTEM_URL . 'views/admin/dashboard.php';
+    $ticketsUrl = SYSTEM_URL . 'views/reports/perfomance.php';
+    $reportsUrl = SYSTEM_URL . 'views/reports/dashboard.php';
+} elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'tech') {
+    $dashboardUrl = SYSTEM_URL . 'views/Tecnico/dashboardTecnico.php';
+    $ticketsUrl = SYSTEM_URL . 'views/Ticket/ver_ticket_usuario.php';
+} elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'client') {
+    $dashboardUrl = SYSTEM_URL . 'views/cliente/dashboard.php';
+    $ticketsUrl = SYSTEM_URL . 'views/Ticket/mis_tickets.php';
+}
+?>
+
 <footer class="footer mt-auto py-4 bg-light">
     <div class="container">
         <div class="row">
@@ -18,19 +43,19 @@
                     </h5>
                     <ul class="footer-links list-unstyled">
                         <li>
-                            <a href="<?php echo BASE_PATH; ?>index.php" class="footer-link">
+                            <a href="<?php echo $dashboardUrl; ?>" class="footer-link">
                                 <i class="fas fa-home me-2"></i>
                                 Inicio
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo BASE_PATH; ?>index.php?controller=report&action=index" class="footer-link">
-                                <i class="fas fa-tachometer-alt me-2"></i>
-                                Dashboard
+                            <a href="<?php echo $ticketsUrl; ?>" class="footer-link">
+                                <i class="fas fa-ticket-alt me-2"></i>
+                                Tickets
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo BASE_PATH; ?>index.php?controller=report&action=custom" class="footer-link">
+                            <a href="<?php echo $reportsUrl; ?>" class="footer-link">
                                 <i class="fas fa-chart-bar me-2"></i>
                                 Informes
                             </a>
@@ -180,25 +205,29 @@
 
 <script>
     // Tema oscuro/claro
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-
-    // Verificar preferencia guardada
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-    }
-
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDarkMode = body.classList.contains('dark-mode');
-        
-        if (isDarkMode) {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-            localStorage.setItem('darkMode', 'disabled');
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+            const body = document.body;
+            
+            // Verificar preferencia guardada
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                
+                if (isDarkMode) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
         }
     });
 </script>

@@ -51,12 +51,12 @@ try {
     error_log("Error al verificar rol de administrador: " . $e->getMessage());
 }
 
-// Definir BASE_PATH para incluir el header
+// Definir BASE_PATH correctamente
 if (!defined('BASE_PATH')) {
-    define('BASE_PATH', dirname(__FILE__) . '/../../..');
+    define('BASE_PATH', '/porfavo/solutia/cssfinal/practicaSolutia4/'); // Ruta relativa desde la raíz del servidor
 }
 
-require_once __DIR__ . '/../../views/partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
 ?>
 
 <style>
@@ -380,4 +380,7 @@ require_once __DIR__ . '/../../views/partials/header.php';
     });
 </script>
 
-<?php require_once BASE_PATH . 'ticket_system/views/partials/footer.php'; ?>
+<?php 
+// Corregir la ruta del footer usando ruta relativa directa
+require_once __DIR__ . '/../partials/footer.php'; 
+?>

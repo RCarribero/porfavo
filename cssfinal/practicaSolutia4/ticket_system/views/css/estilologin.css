@@ -17,6 +17,14 @@ body.dark-mode {
     color: #ffffff;
 }
 
+/* Transiciones suaves para todos los elementos */
+body * {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -253,4 +261,4 @@ body.dark-mode .links a {
   .feature-card p {
     font-size: 14px;
     margin-bottom: 20px;
-  }     
+  }

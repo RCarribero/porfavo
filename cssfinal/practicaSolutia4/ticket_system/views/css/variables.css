@@ -1,0 +1,74 @@
+:root {
+    /* Colores base */
+    --color-primary: #3498db; /* Azul modo claro */
+    --color-primary-dark: #2980b9;
+    --color-secondary: #2ecc71;
+    --color-secondary-dark: #27ae60;
+    --color-accent: #e74c3c;
+    --color-text: #343a40;
+    --color-text-light: #f8f9fa;
+    --color-text-muted: #6c757d;
+    --color-bg: #f8f9fa;
+    --color-bg-light: #ffffff;
+    --color-card: #ffffff;
+    --color-border: #dee2e6;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-info: #0096c7;
+    
+    /* Estados para tickets */
+    --status-open: #e74c3c;
+    --status-in-progress: #f39c12;
+    --status-resolved: #2ecc71;
+    --status-closed: #7f8c8d;
+    
+    /* Espaciado */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    
+    /* Radios */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    --color-primary: #ff8c42; /* Naranja modo oscuro */
+    --color-primary-dark: #e67e22;
+    --color-secondary: #ff7043;
+    --color-secondary-dark: #e67e22;
+    --color-accent: #ff4081;
+    --color-text: #f8f9fa;
+    --color-text-light: #ffffff;
+    --color-text-muted: #adb5bd;
+    --color-bg: #121212;
+    --color-bg-light: #1e1e1e;
+    --color-card: #1e1e1e;
+    --color-border: #444;
+    --color-success: #4caf50;
+    --color-warning: #ffd740;
+    --color-danger: #ff5252;
+    --color-info: #4fc3f7;
+    
+    /* Estados para tickets en modo oscuro */
+    --status-open: #ff4081;
+    --status-in-progress: #ffd740;
+    --status-resolved: #4caf50;
+    --status-closed: #9e9e9e;
+    
+    /* Sombras en modo oscuro */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+}

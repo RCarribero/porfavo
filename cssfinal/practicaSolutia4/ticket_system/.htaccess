@@ -1,5 +1,5 @@
 # Redireccionar errores 404 a nuestra página personalizada
-ErrorDocument 404 /porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/errors/404.php
+ErrorDocument 404 /solutia/cssfinal/practicaSolutia4/ticket_system/views/errors/404.php
 
 # Prevenir la visualización del listado de directorios
 Options -Indexes
@@ -12,4 +12,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Redireccionar a la página de error 404
-RewriteRule ^ /porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/errors/404.php [L]
+RewriteRule ^ /solutia/cssfinal/practicaSolutia4/ticket_system/views/errors/404.php [L]

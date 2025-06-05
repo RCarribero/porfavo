@@ -17,7 +17,7 @@ $allowedRoles = ['admin', 'manager', 'supervisor'];
 if (!in_array($userRole, $allowedRoles)) {
     // Esta parte no se ejecutará gracias a la corrección, pero la mantenemos por seguridad
     $_SESSION['error'] = "No tienes permisos para acceder a los informes de rendimiento.";
-    header('Location: /porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/dashboard.php');
+    header('Location: /solutia/cssfinal/practicaSolutia4/ticket_system/dashboard.php');
     exit;
 }
 
@@ -175,11 +175,19 @@ $avgResolutionTime = $avgResolutionTime ?? ['avg_hours' => 0];
     color: white;
     border-color: #444;
 }
-.dark-mode .graph-container .card-header h5 {
-    color: white;
+
+/* Mejorar la visualización de los gráficos en modo oscuro */
+.dark-mode .card-header {
+    background-color: #2c2c2c !important;
+    border-color: #444 !important;
 }
-.dark-mode .graph-container .card-body {
-    color: white;
+
+.dark-mode .display-4 {
+    color: #ff8c42 !important;
+}
+
+.dark-mode .lead {
+    color: #e0e0e0 !important;
 }
 </style>
 

@@ -8,7 +8,7 @@ $userId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 // Si no hay ID de usuario, mostrar un error
 if ($userId === 0) {
     echo '<div class="alert alert-danger">Error: No se proporcionó un ID de usuario válido.</div>';
-    echo '<div class="mt-3"><a href="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+    echo '<div class="mt-3"><a href="/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
     require_once __DIR__ . '/../partials/footer.php';
     exit;
 }
@@ -25,13 +25,13 @@ try {
 
     if (!$user) {
         echo '<div class="alert alert-danger">Error: No se encontró el usuario con ID ' . htmlspecialchars($userId) . '.</div>';
-        echo '<div class="mt-3"><a href="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+        echo '<div class="mt-3"><a href="/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
         require_once __DIR__ . '/../partials/footer.php';
         exit;
     }
 } catch (PDOException $e) {
     echo '<div class="alert alert-danger">Error de base de datos: ' . $e->getMessage() . '</div>';
-    echo '<div class="mt-3"><a href="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+    echo '<div class="mt-3"><a href="/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
     require_once __DIR__ . '/../partials/footer.php';
     exit;
 }
@@ -57,7 +57,7 @@ $errors = [];
     
     <div class="card">
         <div class="card-body">
-            <form action="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=update" method="post">
+            <form action="/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=update" method="post">
                 <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                 
                 <div class="row mb-3">
@@ -89,7 +89,7 @@ $errors = [];
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                    <a href="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-secondary">
+                    <a href="/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=index" class="btn btn-secondary">
                         <i class="bi bi-arrow-left"></i> Cancelar
                     </a>
                     <button type="submit" class="btn btn-primary">

@@ -39,6 +39,9 @@ if (!defined('SYSTEM_URL')) {
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     
+    <!-- Variables CSS globales -->
+    <link rel="stylesheet" href="/solutia/cssfinal/practicaSolutia4/ticket_system/views/css/variables.css">
+    
     <style>
         :root {
             --color-primary: #3498db;
@@ -203,12 +206,24 @@ if (!defined('SYSTEM_URL')) {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li>
-                                <a class="dropdown-item" href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/admin/perfil.php' : (isset($_SESSION['role']) && $_SESSION['role'] === 'tech' ? '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/Tecnico/gestionPerfilTecnico.php' : '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/cliente/perfil.php'); ?>">
+                                <a class="dropdown-item" href="<?php 
+                                    if (isset($_SESSION['role'])) {
+                                        if ($_SESSION['role'] === 'admin') {
+                                            echo SYSTEM_URL . 'views/admin/gestionPerfilAdmin.php';
+                                        } else if ($_SESSION['role'] === 'tech') {
+                                            echo SYSTEM_URL . 'views/Tecnico/gestionPerfilTecnico.php';
+                                        } else {
+                                            echo SYSTEM_URL . 'views/cliente/perfil.php';
+                                        }
+                                    } else {
+                                        echo SYSTEM_URL . 'views/sesion/login.php';
+                                    }
+                                ?>">
                                     <i class="fas fa-user-cog"></i> Mi Perfil
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/sesion/logout.php">
+                                <a class="dropdown-item" href="<?php echo SYSTEM_URL; ?>views/sesion/logout.php">
                                     <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                                 </a>
                             </li>

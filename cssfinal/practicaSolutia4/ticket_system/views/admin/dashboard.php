@@ -53,7 +53,7 @@ try {
 
 // Definir BASE_PATH correctamente
 if (!defined('BASE_PATH')) {
-    define('BASE_PATH', '/porfavo/solutia/cssfinal/practicaSolutia4/'); // Ruta relativa desde la raíz del servidor
+    define('BASE_PATH', '/solutia/cssfinal/practicaSolutia4/'); // Ruta relativa desde la raíz del servidor
 }
 
 require_once __DIR__ . '/../partials/header.php';

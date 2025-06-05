@@ -203,33 +203,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
 <!-- Scripts de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    // Tema oscuro/claro
-    document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            const body = document.body;
-            
-            // Verificar preferencia guardada
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                body.classList.add('dark-mode');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-            }
-            
-            themeToggle.addEventListener('click', function() {
-                body.classList.toggle('dark-mode');
-                const isDarkMode = body.classList.contains('dark-mode');
-                
-                if (isDarkMode) {
-                    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    themeToggle.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            });
-        }
-    });
-</script>
+<!-- Script centralizado para manejo del tema -->
+<script src="/solutia/cssfinal/practicaSolutia4/ticket_system/views/js/theme.js"></script>
 </body>
 </html>

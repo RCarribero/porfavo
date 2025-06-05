@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Archivo de configuración de rutas para el sistema de tickets
@@ -14,7 +15,7 @@ if (!defined('ROOT_PATH')) {
 if (!defined('BASE_URL')) {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
-    define('BASE_URL', $protocol . '://' . $host . '/porfavo/solutia/cssfinal/practicaSolutia4/');
+    define('BASE_URL', $protocol . '://' . $host . '/solutia/cssfinal/practicaSolutia4/');
 }
 
 // Definir la URL del sistema de tickets

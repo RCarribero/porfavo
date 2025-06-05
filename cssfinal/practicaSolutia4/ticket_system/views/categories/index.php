@@ -118,6 +118,26 @@ require_once dirname(__FILE__) . '/../partials/header.php';
         background: transparent !important;
         border-color: #ff8c42 !important;
     }
+    
+    /* Mejorar contraste de los modales en modo oscuro */
+    body.dark-mode .modal-content {
+        background-color: #2c2c2c !important;
+        color: #ffffff !important;
+        border-color: #444444 !important;
+    }
+    
+    body.dark-mode .modal-header,
+    body.dark-mode .modal-footer {
+        border-color: #444444 !important;
+    }
+    
+    body.dark-mode .text-danger {
+        color: #ff6b6b !important;
+    }
+    
+    body.dark-mode .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
 </style>
 
 <div class="container mt-4">

@@ -19,7 +19,7 @@ $avgResolutionTime = $avgResolutionTime ?? ['avg_hours' => 0];
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Gráficos de Rendimiento</h1>
-        <a href="index.php?controller=report&action=custom" class="btn btn-secondary">
+        <a href="../../../index.php?controller=report&action=custom" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Volver a Informes
         </a>
     </div>

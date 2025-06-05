@@ -879,9 +879,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </a>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <a href="../Tecnico/ver_comentarios.php" class="btn btn-info w-100 h-100 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-comments me-2 fs-4"></i>
-                                    <span>Ver Comentarios</span>
+                                <a href="#tickets-list" class="btn btn-info w-100 h-100 d-flex align-items-center justify-content-center" onclick="scrollToTickets()">
+                                    <i class="fas fa-list me-2 fs-4"></i>
+                                    <span>Ver Tickets</span>
                                 </a>
                             </div>
                         </div>
@@ -973,7 +973,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Lista de Tickets -->
-            <div class="tickets-list">
+            <div class="tickets-list" id="tickets-list">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0"><i class="fas fa-list me-2"></i>Lista de Tickets</h4>
@@ -1095,6 +1095,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 this.innerHTML = isDark ? 'Modo Oscuro' : 'Modo Claro';
             });
+
+            // Función para desplazar a la sección de tickets
+            window.scrollToTickets = function() {
+                const ticketsSection = document.getElementById('tickets-list');
+                if (ticketsSection) {
+                    ticketsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
 
             // Mostrar/ocultar detalles de ticket
             document.querySelectorAll('.ticket-details-toggle').forEach(button => {

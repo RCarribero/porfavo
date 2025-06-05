@@ -123,7 +123,7 @@ require_once dirname(__FILE__) . '/../partials/header.php';
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                    <a href="../../index.php?controller=user&action=index" class="btn btn-secondary">
+                    <a href="index.php" class="btn btn-secondary">
                         <i class="bi bi-arrow-left"></i> Cancelar
                     </a>
                     <button type="submit" class="btn btn-primary">

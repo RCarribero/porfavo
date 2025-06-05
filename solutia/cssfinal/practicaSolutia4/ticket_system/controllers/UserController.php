@@ -89,7 +89,8 @@ class UserController {
         }
         
         $errors = [];
-        require_once 'ticket_system/views/users/edit.php';
+        // Asegurarse de que la ruta sea correcta
+        require_once __DIR__ . '/../views/users/edit.php';
     }
     
     // Procesar la actualización de un usuario

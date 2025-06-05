@@ -1,6 +1,42 @@
 <?php
 // Incluir header
-require_once 'ticket_system/views/partials/header.php';
+require_once '../partials/header.php';
+
+// Obtener ID del usuario desde la URL
+$userId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+// Si no hay ID de usuario, mostrar un error
+if ($userId === 0) {
+    echo '<div class="alert alert-danger">Error: No se proporcionó un ID de usuario válido.</div>';
+    echo '<div class="mt-3"><a href="index.php" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+    require_once '../partials/footer.php';
+    exit;
+}
+
+// Consultar datos del usuario directamente desde la base de datos
+require_once '../../config/database.php';
+$database = new Database();
+$pdo = $database->getConnection();
+
+try {
+    $stmt = $pdo->prepare("SELECT id, username, email, role FROM users WHERE id = ?");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        echo '<div class="alert alert-danger">Error: No se encontró el usuario con ID ' . htmlspecialchars($userId) . '.</div>';
+        echo '<div class="mt-3"><a href="index.php" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+        require_once '../partials/footer.php';
+        exit;
+    }
+} catch (PDOException $e) {
+    echo '<div class="alert alert-danger">Error de base de datos: ' . $e->getMessage() . '</div>';
+    echo '<div class="mt-3"><a href="index.php" class="btn btn-primary">Volver a la lista de usuarios</a></div>';
+    require_once '../partials/footer.php';
+    exit;
+}
+
+$errors = [];
 ?>
 
 <div class="container mt-4">
@@ -67,5 +103,5 @@ require_once 'ticket_system/views/partials/header.php';
 
 <?php
 // Incluir footer
-require_once 'ticket_system/views/partials/footer.php';
+require_once '../partials/footer.php';
 ?>

@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function validarFormulario() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
-
+            
             if (password !== '' || confirmPassword !== '') {
                 if (password !== confirmPassword) {
                     alert('Las contraseñas no coinciden.');

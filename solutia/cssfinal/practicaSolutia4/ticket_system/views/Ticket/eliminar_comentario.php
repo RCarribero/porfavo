@@ -18,3 +18,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment_id'], $_POST[
 } else {
     echo "No se pudo eliminar el comentario.";
 }
+?>

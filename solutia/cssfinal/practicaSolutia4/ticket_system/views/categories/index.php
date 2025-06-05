@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+// Si las categorías no están definidas (por ejemplo, cuando se accede directamente a esta página),
+// cargar el modelo y obtener las categorías
+if (!isset($categories)) {
+    require_once __DIR__ . '/../../models/Category.php';
+    $categoryModel = new Category();
+    $categories = $categoryModel->getAllCategories();
+}
+
 require_once dirname(__FILE__) . '/../partials/header.php';
 ?>
 
@@ -206,6 +216,16 @@ require_once dirname(__FILE__) . '/../partials/header.php';
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#categoriesTable').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
+            }
+        });
+    });
+</script>
 
 <?php
 // Incluir footer

@@ -289,7 +289,13 @@ require_once __DIR__ . '/../../views/partials/header.php';
                         </div>
                         <div class="admin-card-body">
                             <h5 class="admin-card-title">Gestión de Categorías</h5>
-                            <p class="admin-card-text">Administra las categorías de tickets.</p>
+                            <p class="admin-card-text">
+                                <?php if (isset($categories) && count($categories) > 0): ?>
+                                    Hay <?php echo count($categories); ?> categorías registradas.
+                                <?php else: ?>
+                                    No hay categorías registradas.
+                                <?php endif; ?>
+                            </p>
                             <a href="../categories/index.php" class="admin-card-link">
                                 <i class="fas fa-arrow-right me-2"></i>
                                 <span>Ir a Categorías</span>

@@ -10,6 +10,15 @@ class AdminController {
     }
     
     public function dashboard() {
+        // Cargar modelos necesarios
+        require_once __DIR__ . '/../models/Category.php';
+        
+        // Instanciar modelos
+        $categoryModel = new Category();
+        
+        // Obtener datos para el dashboard
+        $categories = $categoryModel->getAllCategories();
+        
         // Cargar la vista del dashboard
         require_once __DIR__ . '/../views/admin/dashboard.php';
     }

@@ -1,7 +1,12 @@
 <?php
+// Redireccionar si el usuario accede directamente a este archivo en lugar de a través del controlador
+if (!isset($ticketsByStatus) && !isset($ticketsByCategory) && !isset($ticketsByTechnician)) {
+    header('Location: ../../../index.php?controller=report&action=performance');
+    exit();
+}
+
 // Incluir header
 require_once __DIR__ . '/../partials/header.php';
-
 
 // Asegurar que todas las variables están definidas
 $ticketsByStatus = $ticketsByStatus ?? [];

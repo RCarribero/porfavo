@@ -209,7 +209,7 @@ require_once dirname(__FILE__) . '/../partials/header.php';
                                     <td>
                                         <div class="btn-group btn-group-sm">
                                             <!-- Ruta corregida con ID en la URL -->
-                                            <a href="edit.php?id=<?php echo $user['id']; ?>" class="btn btn-primary">
+                                            <a href="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=edit&id=<?php echo $user['id']; ?>" class="btn btn-primary">
                                                 <i class="fas fa-edit me-1"></i> Editar
                                             </a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $user['id']; ?>">
@@ -231,7 +231,7 @@ require_once dirname(__FILE__) . '/../partials/header.php';
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                         <!-- Corregir la URL de eliminación -->
-                                                        <form action="index.php?controller=user&action=delete" method="post">
+                                                        <form action="/porfavo/solutia/cssfinal/practicaSolutia4/index.php?controller=user&action=delete" method="post">
                                                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                                             <button type="submit" class="btn btn-danger">Eliminar</button>
                                                         </form>

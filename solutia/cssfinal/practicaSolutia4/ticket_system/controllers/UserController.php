@@ -131,7 +131,7 @@ class UserController {
         
         // Si hay errores, volver al formulario
         if (!empty($errors)) {
-            require_once 'ticket_system/views/users/edit.php';
+            require_once __DIR__ . '/../views/users/edit.php';
             return;
         }
         
@@ -150,7 +150,7 @@ class UserController {
             exit;
         } else {
             $errors[] = "Error al actualizar el usuario";
-            require_once 'ticket_system/views/users/edit.php';
+            require_once __DIR__ . '/../views/users/edit.php';
         }
     }
     
@@ -326,13 +326,13 @@ class UserController {
                 // Redirigir según el rol
                 switch ($user['role']) {
                     case 'admin':
-                        header('Location: /pruebafinal/index.php?controller=admin&action=dashboard');
+                        header('Location: index.php?controller=admin&action=dashboard');
                         break;
                     case 'tech':
-                        header('Location: /pruebafinal/index.php?controller=tech&action=dashboard');
+                        header('Location: index.php?controller=tech&action=dashboard');
                         break;
                     default:
-                        header('Location: /pruebafinal/index.php?controller=client&action=dashboard');
+                        header('Location: index.php?controller=client&action=dashboard');
                         break;
                 }
                 exit;

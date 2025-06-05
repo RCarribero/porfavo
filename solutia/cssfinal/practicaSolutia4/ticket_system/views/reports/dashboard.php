@@ -1,4 +1,35 @@
 <?php
+session_start();
+
+// Verificar autenticación
+if (!isset($_SESSION['id']) && !isset($_SESSION['user_id'])) {
+    header('Location: ../sesion/login.php');
+    exit();
+}
+
+// Obtener datos del usuario
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : $_SESSION['id'];
+
+// Consulta para obtener datos completos del usuario
+require_once dirname(__FILE__, 3) . '/config/database.php';
+$database = new Database();
+$pdo = $database->getConnection();
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $user_data = $stmt->fetch();
+    
+    // Actualizar nombre de usuario en la sesión para mostrar correctamente en el header
+    if (isset($user_data['username']) && !empty($user_data['username'])) {
+        $_SESSION['username'] = $user_data['username'];
+    } elseif (isset($user_data['name']) && !empty($user_data['name'])) {
+        $_SESSION['username'] = $user_data['name'];
+    }
+} catch(PDOException $e) {
+    error_log("Error al obtener datos de usuario: " . $e->getMessage());
+}
+
 // Incluir header
 require_once dirname(__FILE__) . '/../partials/header.php';
 
@@ -344,7 +375,7 @@ if (!isset($priorityStats)) $priorityStats = [];
                 </div>
                 <div class="card-body">
                     <p>Para generar informes personalizados con filtros avanzados, haga clic en el siguiente botón:</p>
-                    <a href="index.php?controller=report&action=custom" class="btn btn-orange">
+                    <a href="custom_report.php" class="btn btn-orange">
                         <i class="fas fa-file-alt"></i> Informes Personalizados
                     </a>
                 </div>

@@ -161,7 +161,7 @@ if (substr(BASE_PATH, -1) !== '/') {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="../admin/dashboard.php">
+            <a class="navbar-brand" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/admin/dashboard.php">
                 <img src="https://camaradesevilla.com/wp-content/uploads/2024/07/S00-logo-Grupo-Solutia-v01-1.png" 
                      alt="Logo" style="max-height: 40px;">
             </a>
@@ -171,17 +171,17 @@ if (substr(BASE_PATH, -1) !== '/') {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/dashboard.php">
+                        <a class="nav-link" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/admin/dashboard.php">
                             <i class="fas fa-home me-1"></i> Inicio
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reports/dashboard.php">
+                        <a class="nav-link" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/reports/dashboard.php">
                             <i class="fas fa-tachometer-alt me-1"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reports/custom_report.php">
+                        <a class="nav-link" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/reports/custom_report.php">
                             <i class="fas fa-chart-bar me-1"></i> Informes
                         </a>
                     </li>
@@ -198,12 +198,12 @@ if (substr(BASE_PATH, -1) !== '/') {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li>
-                                <a class="dropdown-item" href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '../admin/perfil.php' : (isset($_SESSION['role']) && $_SESSION['role'] === 'tech' ? '../Tecnico/gestionPerfilTecnico.php' : '../cliente/perfil.php'); ?>">
+                                <a class="dropdown-item" href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/admin/perfil.php' : (isset($_SESSION['role']) && $_SESSION['role'] === 'tech' ? '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/Tecnico/gestionPerfilTecnico.php' : '/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/cliente/perfil.php'); ?>">
                                     <i class="fas fa-user-cog"></i> Mi Perfil
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="../sesion/logout.php">
+                                <a class="dropdown-item" href="/porfavo/solutia/cssfinal/practicaSolutia4/ticket_system/views/sesion/logout.php">
                                     <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                                 </a>
                             </li>

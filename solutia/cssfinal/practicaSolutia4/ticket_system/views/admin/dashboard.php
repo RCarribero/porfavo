@@ -39,6 +39,13 @@ try {
     $_SESSION['role'] = $admin_data['role'];
     $_SESSION['admin_auth'] = true;
     
+    // Actualizar nombre de usuario en la sesión para mostrar correctamente en el header
+    if (isset($admin_data['username']) && !empty($admin_data['username'])) {
+        $_SESSION['username'] = $admin_data['username'];
+    } elseif (isset($admin_data['name']) && !empty($admin_data['name'])) {
+        $_SESSION['username'] = $admin_data['name'];
+    }
+    
 } catch(PDOException $e) {
     // Si hay error en la base de datos, continuar (mostrar dashboard)
     error_log("Error al verificar rol de administrador: " . $e->getMessage());

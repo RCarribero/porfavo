@@ -1,6 +1,27 @@
 <?php
+session_start();
+
 // Incluir header
 require_once __DIR__ . '/../partials/header.php';
+
+// Agregar enlaces a jQuery UI para el datepicker
+echo '<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>';
+
+// Cargar modelos si se accede directamente a esta página
+if (!isset($technicians) || !isset($categories)) {
+    require_once __DIR__ . '/../../models/Report.php';
+    require_once __DIR__ . '/../../models/User.php';
+    require_once __DIR__ . '/../../models/Category.php';
+    
+    $reportModel = new Report();
+    $userModel = new User();
+    $categoryModel = new Category();
+    
+    // Obtener datos para los filtros
+    $technicians = $userModel->getAllTechnicians();
+    $categories = $categoryModel->getAllCategories();
+}
 
 // Asegurar que $report está definido
 $report = $report ?? [];
@@ -9,6 +30,43 @@ $endDate = $endDate ?? date('Y-m-d');
 $selectedTechnician = $selectedTechnician ?? '';
 $selectedCategory = $selectedCategory ?? '';
 $selectedStatus = $selectedStatus ?? '';
+
+// Procesar el formulario si se accede directamente a esta página
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los valores de los campos de fecha (pueden venir de los campos ocultos o directamente)
+    $startDate = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+    $endDate = isset($_POST['end_date']) ? $_POST['end_date'] : '';
+    
+    // Validar formato de fecha
+    if (!empty($startDate) && strpos($startDate, '/') !== false) {
+        // Convertir de formato dd/mm/yyyy a yyyy-mm-dd
+        $parts = explode('/', $startDate);
+        if (count($parts) === 3) {
+            $startDate = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+        }
+    }
+    
+    if (!empty($endDate) && strpos($endDate, '/') !== false) {
+        // Convertir de formato dd/mm/yyyy a yyyy-mm-dd
+        $parts = explode('/', $endDate);
+        if (count($parts) === 3) {
+            $endDate = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+        }
+    }
+    
+    $selectedTechnician = isset($_POST['technician']) ? $_POST['technician'] : '';
+    $selectedCategory = isset($_POST['category']) ? $_POST['category'] : '';
+    $selectedStatus = isset($_POST['status']) ? $_POST['status'] : '';
+    
+    // Obtener los tickets filtrados
+    $report = $reportModel->getCustomReport(
+        $startDate, 
+        $endDate, 
+        $selectedTechnician, 
+        $selectedCategory, 
+        $selectedStatus
+    );
+}
 ?>
 
 <style>
@@ -296,6 +354,48 @@ $selectedStatus = $selectedStatus ?? '';
         color: #f8f9fa !important;
         filter: brightness(0) invert(1);
     }
+    
+    /* Estilos específicos para los campos de fecha */
+    input[type="date"] {
+        position: relative;
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    /* Añadir icono de calendario */
+    .date-input-container {
+        position: relative;
+    }
+    
+    .date-input-container:after {
+        content: "\f073";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--color-text);
+    }
+    
+    body.dark-mode .date-input-container:after {
+        color: #f8f9fa;
+    }
 
     .card {
         border-radius: 15px;
@@ -457,15 +557,27 @@ $selectedStatus = $selectedStatus ?? '';
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="start_date">Fecha Inicio</label>
-                            <input type="date" class="form-control date-input" id="start_date" name="start_date" 
-                                value="<?php echo $startDate; ?>">
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" id="start_date" name="start_date" 
+                                    value="<?php echo date('d/m/Y', strtotime($startDate)); ?>" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input type="hidden" name="start_date_hidden" id="start_date_hidden" value="<?php echo $startDate; ?>">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="end_date">Fecha Fin</label>
-                            <input type="date" class="form-control date-input" id="end_date" name="end_date" 
-                                value="<?php echo $endDate; ?>">
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" id="end_date" name="end_date" 
+                                    value="<?php echo date('d/m/Y', strtotime($endDate)); ?>" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input type="hidden" name="end_date_hidden" id="end_date_hidden" value="<?php echo $endDate; ?>">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -557,8 +669,34 @@ $selectedStatus = $selectedStatus ?? '';
                             <td><?php echo $ticket['id']; ?></td>
                             <td><?php echo htmlspecialchars($ticket['title']); ?></td>
                             <td>
-                                <span class="badge bg-<?php echo $this->getStatusColor($ticket['status']); ?>">
-                                    <?php echo $this->getStatusLabel($ticket['status']); ?>
+                                <?php
+                                // Definir funciones auxiliares si no existen
+                                if (!function_exists('getStatusColor')) {
+                                    function getStatusColor($status) {
+                                        $colors = [
+                                            'open' => 'warning',
+                                            'in_progress' => 'info',
+                                            'resolved' => 'success',
+                                            'closed' => 'secondary'
+                                        ];
+                                        return $colors[$status] ?? 'primary';
+                                    }
+                                }
+                                
+                                if (!function_exists('getStatusLabel')) {
+                                    function getStatusLabel($status) {
+                                        $labels = [
+                                            'open' => 'Abierto',
+                                            'in_progress' => 'En Progreso',
+                                            'resolved' => 'Resuelto',
+                                            'closed' => 'Cerrado'
+                                        ];
+                                        return $labels[$status] ?? $status;
+                                    }
+                                }
+                                ?>
+                                <span class="badge bg-<?php echo getStatusColor($ticket['status']); ?>">
+                                    <?php echo getStatusLabel($ticket['status']); ?>
                                 </span>
                             </td>
                             <td><?php echo ucfirst($ticket['priority']); ?></td>
@@ -593,6 +731,7 @@ $selectedStatus = $selectedStatus ?? '';
 
 <script>
     $(document).ready(function() {
+        // Inicializar DataTable
         const table = $('#reportTable').DataTable({
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
@@ -643,6 +782,121 @@ $selectedStatus = $selectedStatus ?? '';
             } else {
                 table.table().container().classList.remove('dark-mode');
             }
+        });
+        
+        // Configuración del datepicker para fechas
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        
+        // Inicializar datepicker para fecha de inicio
+        $('#start_date').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            onSelect: function(dateText) {
+                // Convertir fecha dd/mm/yyyy a formato yyyy-mm-dd para el campo oculto
+                const parts = dateText.split('/');
+                const isoDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+                $('#start_date_hidden').val(isoDate);
+            }
+        });
+        
+        // Inicializar datepicker para fecha de fin
+        $('#end_date').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            onSelect: function(dateText) {
+                // Convertir fecha dd/mm/yyyy a formato yyyy-mm-dd para el campo oculto
+                const parts = dateText.split('/');
+                const isoDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+                $('#end_date_hidden').val(isoDate);
+            }
+        });
+        
+        // Hacer que los iconos de calendario también abran el datepicker
+        $('.input-group-append').click(function() {
+            $(this).prev('input.datepicker').datepicker('show');
+        });
+        
+        // Ajustar estilos del datepicker para modo oscuro
+        if (document.body.classList.contains('dark-mode')) {
+            applyDarkModeToDatepicker();
+        }
+        
+        // Escuchar cambios en el modo oscuro
+        document.body.addEventListener('themeChange', function() {
+            if (document.body.classList.contains('dark-mode')) {
+                applyDarkModeToDatepicker();
+            } else {
+                removeDarkModeFromDatepicker();
+            }
+        });
+        
+        // Función para aplicar modo oscuro al datepicker
+        function applyDarkModeToDatepicker() {
+            // Agregar estilos CSS para el datepicker en modo oscuro
+            if (!$('#datepicker-dark-styles').length) {
+                $('head').append(
+                    '<style id="datepicker-dark-styles">' +
+                    '.ui-datepicker { background-color: #1e1e1e !important; color: #f8f9fa !important; }' +
+                    '.ui-datepicker-header { background-color: #333 !important; color: #f8f9fa !important; border-color: #444 !important; }' +
+                    '.ui-datepicker .ui-state-default { background-color: #2d2d2d !important; color: #f8f9fa !important; border-color: #444 !important; }' +
+                    '.ui-datepicker .ui-state-highlight { background-color: #ff8c42 !important; color: #fff !important; }' +
+                    '.ui-datepicker .ui-state-active { background-color: #ff8c42 !important; color: #fff !important; }' +
+                    '.ui-datepicker .ui-state-hover { background-color: #444 !important; }' +
+                    '.ui-datepicker th { color: #f8f9fa !important; }' +
+                    '</style>'
+                );
+            }
+        }
+        
+        // Función para quitar modo oscuro del datepicker
+        function removeDarkModeFromDatepicker() {
+            $('#datepicker-dark-styles').remove();
+        }
+        
+        // Modificar el formulario para enviar las fechas correctamente
+        $('#reportForm').submit(function() {
+            // Asegurarse de que los campos ocultos se envíen con el formato correcto
+            if ($('#start_date_hidden').val()) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'start_date',
+                    value: $('#start_date_hidden').val()
+                }).appendTo('#reportForm');
+            }
+            
+            if ($('#end_date_hidden').val()) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'end_date',
+                    value: $('#end_date_hidden').val()
+                }).appendTo('#reportForm');
+            }
+            
+            // Eliminar los campos originales del envío
+            $('#start_date').removeAttr('name');
+            $('#end_date').removeAttr('name');
+            
+            return true;
         });
     });
 </script>

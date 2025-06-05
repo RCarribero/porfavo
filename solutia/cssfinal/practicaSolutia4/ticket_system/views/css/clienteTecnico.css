@@ -1,0 +1,251 @@
+/* estilocontacto.css - Versión con estilo cuadrado y mejor diseño */
+
+/* Variables de color */
+:root {
+    --color-primary: #3498db;
+    --color-primary-dark: #2980b9;
+    --color-secondary: #2ecc71;
+    --color-secondary-dark: #27ae60;
+    --color-accent: #e74c3c;
+    --color-text: #343a40;
+    --color-text-dark: #f8f9fa;
+    --color-bg: #f8f9fa;
+    --color-bg-dark: #121212;
+    --color-card: #ffffff;
+    --color-card-dark: #1e1e1e;
+    --color-border: #dee2e6;
+    --color-border-dark: #444;
+    --color-orange: #ff8c42;
+    --color-orange-dark: #e67e22;
+  }
+  
+  /* Modo oscuro */
+  .dark-mode {
+    --color-bg: var(--color-bg-dark);
+    --color-text: var(--color-text-dark);
+    --color-card: var(--color-card-dark);
+    --color-border: var(--color-border-dark);
+    --color-primary: var(--color-orange);
+  }
+  
+  /* Estructura base */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    min-height: 100vh;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 20px;
+  }
+  
+  /* Logo */
+  .logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  /* Header - Alinear el botón de modo oscuro a la izquierda */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: row-reverse; /* Invierte el orden de los elementos */
+  }
+  
+  /* Botón de modo oscuro */
+  #theme-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  
+  #theme-button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Menú de usuario */
+  .user-menu span {
+    color: var(--color-primary);
+    font-weight: bold;
+    padding: 8px 12px;
+    display: inline-block;
+  }
+  
+  .user-dropdown {
+    border-radius: 0;
+  }
+  
+  /* Navegación */
+  .navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    gap: 5px;
+  }
+  
+  .navbar a {
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 0;
+    font-weight: bold;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  
+  .navbar a:hover,
+  .navbar a.active {
+    background-color: rgba(52, 152, 219, 0.1);
+    border: 1px solid var(--color-primary);
+  }
+  
+  /* Formulario */
+  .contact-form {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    padding: 40px; /* Más espacio interno */
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Sombra más ligera */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+  }
+  
+  .contact-form h2 {
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Campos de formulario */
+  .form-group {
+    margin-bottom: 20px; /* Espacio entre cada input */
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: none;
+    background-color: #f8f8f8;
+    padding: 14px;
+    font-size: 16px;
+    width: 100%;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .form-group textarea {
+    min-height: 120px;
+  }
+  
+  /* Botones */
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  
+  .cancel-button,
+  .send-message-button {
+    padding: 14px 30px;
+    border-radius: 0;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  
+  .cancel-button {
+    background-color: #f0f0f0;
+    color: var(--color-text);
+    border: 1px solid #ddd;
+  }
+  
+  .send-message-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .send-message-button:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+  
+  /* Modo oscuro */
+  .dark-mode {
+    .contact-form {
+      border-color: var(--color-border-dark);
+    }
+    
+    .navbar a:hover,
+    .navbar a.active {
+      border-color: var(--color-orange);
+    }
+    
+    .send-message-button {
+      background-color: var(--color-orange);
+      border-color: var(--color-orange);
+    }
+    
+    .send-message-button:hover {
+      background-color: var(--color-orange-dark);
+      border-color: var(--color-orange-dark);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .navbar ul {
+      flex-wrap: wrap;
+    }
+    
+    .contact-form {
+      padding: 20px;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .cancel-button,
+    .send-message-button {
+      width: 100%;
+    }
+  }
+  

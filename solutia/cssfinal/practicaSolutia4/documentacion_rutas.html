@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de Rutas del Proyecto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        .file-path {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .line-number {
+            font-weight: bold;
+            color: #9b59b6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documentación de Rutas del Proyecto</h1>
+    <p>Este documento contiene todas las rutas encontradas en el proyecto, organizadas por archivo.</p>
+
+    <table>
+        <tr>
+            <th>Archivo</th>
+            <th>Línea</th>
+            <th>Código</th>
+            <th>Tipo</th>
+        </tr>
+        <!-- index.php -->
+        <tr>
+            <td rowspan="5" class="file-path">index.php</td>
+            <td class="line-number">3</td>
+            <td><code>define('BASE_PATH', __DIR__ . '/');</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">9</td>
+            <td><code>require_once __DIR__ . '/ticket_system/controllers/UserController.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">10</td>
+            <td><code>require_once __DIR__ . '/ticket_system/controllers/CategoryController.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">11</td>
+            <td><code>require_once __DIR__ . '/ticket_system/controllers/ReportController.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">12</td>
+            <td><code>require_once __DIR__ . '/ticket_system/controllers/AdminController.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- AdminController.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/controllers/AdminController.php</td>
+            <td class="line-number">26</td>
+            <td><code>require_once dirname(__FILE__) . '/../views/admin/dashboard.php';</code></td>
+            <td>Ruta absoluta con dirname(__FILE__)</td>
+        </tr>
+        <tr>
+            <td class="line-number">32</td>
+            <td><code>require_once __DIR__ . '/../views/admin/settings.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- UserController.php -->
+        <tr>
+            <td rowspan="8" class="file-path">ticket_system/controllers/UserController.php</td>
+            <td class="line-number">6</td>
+            <td><code>require_once 'ticket_system/models/User.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">13</td>
+            <td><code>require_once 'ticket_system/views/users/index.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">19</td>
+            <td><code>require_once 'ticket_system/views/users/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">53</td>
+            <td><code>require_once 'ticket_system/views/users/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">72</td>
+            <td><code>require_once 'ticket_system/views/users/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">91</td>
+            <td><code>require_once 'ticket_system/views/users/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">132</td>
+            <td><code>require_once 'ticket_system/views/users/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">151</td>
+            <td><code>require_once 'ticket_system/views/users/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- CategoryController.php -->
+        <tr>
+            <td rowspan="8" class="file-path">ticket_system/controllers/CategoryController.php</td>
+            <td class="line-number">6</td>
+            <td><code>require_once 'ticket_system/models/Category.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">13</td>
+            <td><code>require_once 'ticket_system/views/categories/index.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">19</td>
+            <td><code>require_once 'ticket_system/views/categories/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">35</td>
+            <td><code>require_once 'ticket_system/views/categories/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">52</td>
+            <td><code>require_once 'ticket_system/views/categories/create.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">71</td>
+            <td><code>require_once 'ticket_system/views/categories/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">89</td>
+            <td><code>require_once 'ticket_system/views/categories/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">106</td>
+            <td><code>require_once 'ticket_system/views/categories/edit.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- ReportController.php -->
+        <tr>
+            <td rowspan="6" class="file-path">ticket_system/controllers/ReportController.php</td>
+            <td class="line-number">71</td>
+            <td><code>require_once __DIR__ . '/../views/reports/custom_report.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">90</td>
+            <td><code>require_once __DIR__ . '/../views/reports/custom_report.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">111</td>
+            <td><code>require_once __DIR__ . '/../views/reports/custom_report.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">205</td>
+            <td><code>require_once __DIR__ . '/../lib/tcpdf.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">303</td>
+            <td><code>require_once __DIR__ . '/../lib/tcpdf.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">391</td>
+            <td><code>require_once __DIR__ . '/../views/reports/perfomance.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- admin/dashboard.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/admin/dashboard.php</td>
+            <td class="line-number">1</td>
+            <td><code>require_once dirname(__FILE__) . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con dirname(__FILE__)</td>
+        </tr>
+        <tr>
+            <td class="line-number">65</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- users/index.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/users/index.php</td>
+            <td class="line-number">2</td>
+            <td><code>require_once dirname(__FILE__) . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con dirname(__FILE__)</td>
+        </tr>
+        <tr>
+            <td class="line-number">129</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- users/edit.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/users/edit.php</td>
+            <td class="line-number">3</td>
+            <td><code>require_once 'ticket_system/views/partials/header.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">70</td>
+            <td><code>require_once 'ticket_system/views/partials/footer.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- users/create.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/users/create.php</td>
+            <td class="line-number">2</td>
+            <td><code>require_once 'ticket_system/views/partials/header.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">67</td>
+            <td><code>require_once 'ticket_system/views/partials/footer.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- categories/index.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/categories/index.php</td>
+            <td class="line-number">2</td>
+            <td><code>require_once dirname(__FILE__) . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con dirname(__FILE__)</td>
+        </tr>
+        <tr>
+            <td class="line-number">105</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- categories/edit.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/categories/edit.php</td>
+            <td class="line-number">3</td>
+            <td><code>require_once 'ticket_system/views/partials/header.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">54</td>
+            <td><code>require_once 'ticket_system/views/partials/footer.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- categories/create.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/categories/create.php</td>
+            <td class="line-number">2</td>
+            <td><code>require_once dirname(__FILE__) . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con dirname(__FILE__)</td>
+        </tr>
+        <tr>
+            <td class="line-number">51</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- reports/dashboard.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/reports/dashboard.php</td>
+            <td class="line-number">3</td>
+            <td><code>require_once 'ticket_system/views/partials/header.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+        <tr>
+            <td class="line-number">111</td>
+            <td><code>require_once 'ticket_system/views/partials/footer.php';</code></td>
+            <td>Ruta relativa</td>
+        </tr>
+
+        <!-- reports/custom_report.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/reports/custom_report.php</td>
+            <td class="line-number">3</td>
+            <td><code>require_once __DIR__ . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">177</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- reports/perfomance.php -->
+        <tr>
+            <td rowspan="2" class="file-path">ticket_system/views/reports/perfomance.php</td>
+            <td class="line-number">3</td>
+            <td><code>require_once __DIR__ . '/../partials/header.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="line-number">181</td>
+            <td><code>require_once __DIR__ . '/../partials/footer.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- Modelos -->
+        <tr>
+            <td class="file-path">ticket_system/models/User.php</td>
+            <td class="line-number">6</td>
+            <td><code>require_once __DIR__ . '/../config/database.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="file-path">ticket_system/models/Ticket.php</td>
+            <td class="line-number">7</td>
+            <td><code>require_once __DIR__ . '/../config/Database.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="file-path">ticket_system/models/Report.php</td>
+            <td class="line-number">6</td>
+            <td><code>require_once __DIR__ . '/../config/database.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+        <tr>
+            <td class="file-path">ticket_system/models/Category.php</td>
+            <td class="line-number">6</td>
+            <td><code>require_once __DIR__ . '/../config/database.php';</code></td>
+            <td>Ruta absoluta con __DIR__</td>
+        </tr>
+
+        <!-- Configuración de la base de datos -->
+        <tr>
+            <td rowspan="4" class="file-path">ticket_system/config/database.php</td>
+            <td class="line-number">3</td>
+            <td><code>private $host = '192.167.1.247';</code></td>
+            <td>Configuración de servidor</td>
+        </tr>
+        <tr>
+            <td class="line-number">4</td>
+            <td><code>private $db_name = 'ticket_system';</code></td>
+            <td>Configuración de servidor</td>
+        </tr>
+        <tr>
+            <td class="line-number">5</td>
+            <td><code>private $username = 'force4-8';</code></td>
+            <td>Configuración de servidor</td>
+        </tr>
+        <tr>
+            <td class="line-number">6</td>
+            <td><code>private $password = 'force_1453';</code></td>
+            <td>Configuración de servidor</td>
+        </tr>
+    </table>
+
+    <h2>Enlaces de Navegación</h2>
+    <p>A continuación se muestran los enlaces de navegación principales del panel de administración y los archivos a los que deberían llevar:</p>
+    
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Controlador</th>
+            <th>Acción</th>
+            <th>Archivo destino</th>
+        </tr>
+        <tr>
+            <td>Ir a Usuarios</td>
+            <td><code>index.php?controller=user&action=index</code></td>
+            <td>UserController</td>
+            <td>index</td>
+            <td>ticket_system/views/users/index.php</td>
+        </tr>
+        <tr>
+            <td>Ir a Categorías</td>
+            <td><code>index.php?controller=category&action=index</code></td>
+            <td>CategoryController</td>
+            <td>index</td>
+            <td>ticket_system/views/categories/index.php</td>
+        </tr>
+        <tr>
+            <td>Ir a Reportes</td>
+            <td><code>index.php?controller=report&action=index</code></td>
+            <td>ReportController</td>
+            <td>index</td>
+            <td>ticket_system/views/reports/dashboard.php</td>
+        </tr>
+        <tr>
+            <td>Crear Informe Personalizado</td>
+            <td><code>index.php?controller=report&action=custom</code></td>
+            <td>ReportController</td>
+            <td>custom</td>
+            <td>ticket_system/views/reports/custom_report.php</td>
+        </tr>
+    </table>
+    
+    <h3>Flujo de Navegación</h3>
+    <ol>
+        <li>El usuario hace clic en un enlace en el panel de administración (dashboard.php)</li>
+        <li>La solicitud se envía a index.php con parámetros GET (controller y action)</li>
+        <li>index.php carga el controlador correspondiente</li>
+        <li>El controlador ejecuta la acción solicitada</li>
+        <li>La acción del controlador incluye (require_once) la vista correspondiente</li>
+    </ol>
+    
+    <h2>Rutas de Botones por Vista</h2>
+    <p>A continuación se detallan todas las rutas de los botones en las diferentes vistas del sistema:</p>
+    
+    <h3>1. Panel de Administración (dashboard.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Ir a Usuarios</td>
+            <td><code>index.php?controller=user&action=index</code></td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Ir a Categorías</td>
+            <td><code>index.php?controller=category&action=index</code></td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td>Ir a Reportes</td>
+            <td><code>index.php?controller=report&action=index</code></td>
+            <td>41</td>
+        </tr>
+        <tr>
+            <td>Crear Informe Personalizado</td>
+            <td><code>index.php?controller=report&action=custom</code></td>
+            <td>58</td>
+        </tr>
+    </table>
+    
+    <h3>2. Gestión de Usuarios (users/index.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Crear Usuario</td>
+            <td><code>index.php?controller=user&action=create</code></td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Editar Usuario</td>
+            <td><code>index.php?controller=user&action=edit&id=<?php echo $user['id']; ?></code></td>
+            <td>71</td>
+        </tr>
+        <tr>
+            <td>Volver al Dashboard</td>
+            <td><code>index.php?controller=admin&action=dashboard</code></td>
+            <td>111</td>
+        </tr>
+    </table>
+    
+    <h3>3. Crear Usuario (users/create.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Cancelar</td>
+            <td><code>index.php?controller=user&action=index</code></td>
+            <td>53</td>
+        </tr>
+    </table>
+    
+    <h3>4. Editar Usuario (users/edit.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Cancelar</td>
+            <td><code>index.php?controller=user&action=index</code></td>
+            <td>56</td>
+        </tr>
+    </table>
+    
+    <h3>5. Gestión de Categorías (categories/index.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Crear Categoría</td>
+            <td><code>index.php?controller=category&action=create</code></td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Editar Categoría</td>
+            <td><code>index.php?controller=category&action=edit&id=<?php echo $category['id']; ?></code></td>
+            <td>60</td>
+        </tr>
+    </table>
+    
+    <h3>6. Crear Categoría (categories/create.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Cancelar</td>
+            <td><code>index.php?controller=category&action=index</code></td>
+            <td>37</td>
+        </tr>
+    </table>
+    
+    <h3>7. Editar Categoría (categories/edit.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Cancelar</td>
+            <td><code>index.php?controller=category&action=index</code></td>
+            <td>40</td>
+        </tr>
+    </table>
+    
+    <h3>8. Dashboard de Reportes (reports/dashboard.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Crear Informe Personalizado</td>
+            <td><code>index.php?controller=report&action=custom</code></td>
+            <td>100</td>
+        </tr>
+    </table>
+    
+    <h3>9. Informes Personalizados (reports/custom_report.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Volver al Dashboard</td>
+            <td><code>index.php?controller=report&action=index</code></td>
+            <td>17</td>
+        </tr>
+        <tr>
+            <td>Exportar a CSV</td>
+            <td><code>index.php?controller=report&action=export&format=csv&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?></code></td>
+            <td>96</td>
+        </tr>
+        <tr>
+            <td>Exportar a PDF</td>
+            <td><code>index.php?controller=report&action=export&format=pdf&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>&technician=<?php echo $selectedTechnician; ?>&category=<?php echo $selectedCategory; ?>&status=<?php echo $selectedStatus; ?></code></td>
+            <td>99</td>
+        </tr>
+        <tr>
+            <td>Ver Gráficos</td>
+            <td><code>index.php?controller=report&action=performance</code></td>
+            <td>102</td>
+        </tr>
+        <tr>
+            <td>Exportar Ticket a CSV</td>
+            <td><code>index.php?controller=report&action=export&format=csv&ticket_id=<?php echo $ticket['id']; ?></code></td>
+            <td>142</td>
+        </tr>
+        <tr>
+            <td>Exportar Ticket a PDF</td>
+            <td><code>index.php?controller=report&action=export&format=pdf&ticket_id=<?php echo $ticket['id']; ?></code></td>
+            <td>145</td>
+        </tr>
+    </table>
+    
+    <h3>10. Gráficos de Rendimiento (reports/perfomance.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Informes Personalizados</td>
+            <td><code>index.php?controller=report&action=custom</code></td>
+            <td>15</td>
+        </tr>
+    </table>
+    
+    <h3>11. Barra de Navegación (partials/header.php)</h3>
+    <table>
+        <tr>
+            <th>Botón</th>
+            <th>Enlace</th>
+            <th>Línea</th>
+        </tr>
+        <tr>
+            <td>Sistema de Tickets (Logo)</td>
+            <td><code>index.php</code></td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Inicio</td>
+            <td><code>index.php</code></td>
+            <td>32</td>
+        </tr>
+        <tr>
+            <td>Dashboard</td>
+            <td><code>index.php?controller=report&action=index</code></td>
+            <td>35</td>
+        </tr>
+        <tr>
+            <td>Informes</td>
+            <td><code>index.php?controller=report&action=custom</code></td>
+            <td>38</td>
+        </tr>
+    </table>
+
+    <h2>Resumen de Tipos de Rutas</h2>
+    <ul>
+        <li><strong>Rutas absolutas con __DIR__</strong>: Utilizan la constante mágica __DIR__ para obtener el directorio actual del archivo.</li>
+        <li><strong>Rutas absolutas con dirname(__FILE__)</strong>: Similar a __DIR__, pero usando la función dirname() con la constante __FILE__.</li>
+        <li><strong>Rutas relativas</strong>: Rutas que dependen del directorio de trabajo actual, lo que puede causar problemas si el script se ejecuta desde diferentes ubicaciones.</li>
+    </ul>
+
+    <h2>Recomendaciones</h2>
+    <p>Para un funcionamiento correcto en todos los entornos, se recomienda:</p>
+    <ol>
+        <li>Unificar todas las rutas usando un mismo enfoque (preferiblemente rutas relativas desde la raíz del proyecto)</li>
+        <li>Utilizar una constante BASE_PATH definida en el index.php para todas las inclusiones</li>
+        <li>Cambiar la configuración de la base de datos según el entorno (local o remoto)</li>
+    </ol>
+</body>
+</html>

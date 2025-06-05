@@ -1,0 +1,36 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.status-open { color: var(--accent-color); }
+.status-in-progress { color: #f39c12; }
+.status-resolved { color: var(--secondary-color); }
+.status-closed { color: #7f8c8d; }

@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = '192.167.1.248';
+    private $host = 'localhost';
     private $db_name = 'ticket_system';
-    private $username = 'force4-8';
-    private $password = 'force_1453';
+    private $username = 'root';
+    private $password = '';
     private $conn;
     
     public function getConnection() {
